@@ -54,8 +54,7 @@ Returns: interger 0
 Note:
 ***************************************************************/
 int main()
-{ 
-			 		 
+{ 	 		 
 
 	do{
 	
@@ -107,7 +106,6 @@ int main()
 		}
 		
 		// Play again?
-		
 		cout << endl << "Play again? (y)es or (n)o: ";
 		cin >> playAgain;
 		
@@ -132,17 +130,13 @@ int main()
 	}while((playAgain == 'y' || playAgain == 'Y') && balanceAmount > 5);
 	
 		// Cordial or chastising outro depending on balance amount. 
-		if (balanceAmount >=5)
+		if (balanceAmount >= 0 && (playAgain == 'N' || playAgain == 'n'))
 		{
 			cout << endl << "--------------------------------" << endl;
 			cout << "The final balance is $" << balanceAmount << ". Goodbye, come back soon. ";
 		
 		}
-		else
-		{
-			continueChatter(balanceAmount);	
-			
-		}
+
 	
 	return 0;
 }
@@ -165,6 +159,7 @@ double getWager(double balanceAmount)
 	cout << "How much would you like to wager (Minimum wager: $5.00)? ";
 	cin >> wager;
 	
+	// Sets the lower and upper limit of the wager.
 	while (wager < 5)
 		{
 			cout << "Please enter a wager of $5.00 or greater ";
@@ -196,6 +191,8 @@ Note: the function will display the two die and their sum as well
 ***************************************************************/
 void wagerChatter(double balanceAmount, double wager)
 {
+	
+	// Banters with the user depending on size of wager.
 	if (balanceAmount * .75 < wager)
 	{
 		cout << endl << "Are you nuts? You need to hedge your bets. " << endl;
@@ -208,6 +205,7 @@ void wagerChatter(double balanceAmount, double wager)
 	}
 	
 }
+
 
 /***************************************************************
 Function:  int rollDice() 
@@ -222,7 +220,7 @@ Note: the function will display the two die and their sum as well
 ***************************************************************/
 int rollDice()
 {
-	// Perform random operations.
+	// Seeds and performs random operations to set dice values.
 		srand(time(0));
 		dieOne = (rand() % (MAX_VALUE - MIN_VALUE + 1)) + MIN_VALUE;
 		dieTwo = (rand() % (MAX_VALUE - MIN_VALUE + 1)) + MIN_VALUE;
@@ -251,6 +249,8 @@ Note:
 ***************************************************************/
 void continueChatter(double balanceAmount)
 {
+	// Banters with user who wants to continue playing, depending
+	// on how much they are up or down (or if they're bust!).
 	if (balanceAmount > (startingAmount * 5))
 	{
 		cout << endl << "--------------------------------" << endl;
@@ -266,7 +266,7 @@ void continueChatter(double balanceAmount)
 	else if (balanceAmount >= 0 && balanceAmount <5)
 	{
 		cout << endl << "--------------------------------" << endl;
-		cout << "The final balance is $" << balanceAmount << ". Better luck next time. Good bye. ";
+		cout << "You have less than $5.00 ($" << balanceAmount << "). Better luck next time. Good bye. ";
 		
 	}
 
